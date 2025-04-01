@@ -1,3 +1,5 @@
+import 'package:beasavor/common/utils/app_fonts.dart';
+import 'package:beasavor/common/utils/app_color.dart';
 import 'package:flutter/material.dart';
 
 class ShowerScreen extends StatelessWidget {
@@ -5,6 +7,13 @@ class ShowerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: Text(
+          'ShowerBooth',
+          style: AppFonts.bold.copyWith(color: AppColors.blue100, fontSize:60)
+        ),
+      ),
+    );
   }
 }

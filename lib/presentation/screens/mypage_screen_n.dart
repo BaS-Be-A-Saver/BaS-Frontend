@@ -1,48 +1,58 @@
+import 'package:beasavor/presentation/screens/calendar_screen.dart';
+import 'package:beasavor/presentation/screens/closet_screen.dart';
+import 'package:beasavor/presentation/screens/setting_screen.dart';
+import 'package:beasavor/presentation/widgets/timeset_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:beasavor/common/utils/app_color.dart';
 import 'package:beasavor/common/utils/app_fonts.dart';
-import 'package:beasavor/common/utils/app_icon.dart';
-import 'package:beasavor/common/utils/app_image.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
+import 'package:beasavor/logic/nickname_controller.dart';
+import 'package:beasavor/presentation/widgets/nickname_dialog.dart';
+import 'package:beasavor/logic/timeset_controller.dart';
 
-class MyPageScreen extends StatelessWidget {
+class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
+
+  @override
+  State<MyPageScreen> createState() => _MyPageScreenState();
+}
+
+class _MyPageScreenState extends State<MyPageScreen> {
+  final NicknameController controller = Get.find(); // 닉네임 컨트롤러 가져오기
+  final TimeSetController timeController = Get.find(); // 목표 시간 컨트롤러 가져오기
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.blue10,
-        foregroundColor: AppColors.gray70,
-        leadingWidth: 80,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 20), //로고와 왼쪽 화면 사이 간격 띄우기 위함
-          child: Image.asset(
-            AppImages.logo,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: SvgPicture.asset(
-              AppIcons.settings,
-              width: 24,
-              height: 24,
-              color: AppColors.blue100,
-            ),
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               width: 402,
-              height: 260,
+              height: 320,
               color: AppColors.blue10,
               child: Column(
                 children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    Container(
+                      height: 40,
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const SettingScreen())),
+                        child: Icon(
+                          Icons.settings_outlined,
+                          size: 30,
+                          color: AppColors.blue50,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12,
+                    )
+                  ]),
                   Center(
                     child: Container(
                       width: 130,
@@ -52,79 +62,105 @@ class MyPageScreen extends StatelessWidget {
                           color: AppColors.white),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  Container(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      SizedBox(width: 48),
                       Center(
-                        child: Text(
-                          '초롱이',
-                          style: AppFonts.bold
-                              .copyWith(fontSize: 20, color: AppColors.black),
+                        child: Obx(
+                          () => Text(
+                            controller.nickname.value, //닉네임 표시
+                            style: AppFonts.bold
+                                .copyWith(fontSize: 20, color: AppColors.black),
+                          ),
                         ),
                       ),
-                      SizedBox(width: 3,),
-                      Icon(
-                        Icons.edit,
-                        color: AppColors.gray40,
-                        size: 20,
-                      )
+                      IconButton(
+                        icon: Icon(
+                          Icons.edit,
+                          size: 24,
+                          color: AppColors.gray50,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => NicknameDialog());
+                        },
+                      ),
                     ],
                   ),
                   SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 164,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.blue100,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.checkroom,
-                              color: AppColors.blue100,
-                            ),
-                            SizedBox(width: 5,),
-                            Text(
-                              '옷 갈아입기',
-                              style: AppFonts.regular.copyWith(
-                                  color: AppColors.blue100, fontSize: 13),
-                            )
-                          ],
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const ClosetScreen())),
+                        child: Container(
+                          width: 164,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.blue100,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                              color: AppColors.white),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.checkroom,
+                                color: AppColors.blue100,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                '옷 갈아입기',
+                                style: AppFonts.regular.copyWith(
+                                    color: AppColors.blue100, fontSize: 13),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                      SizedBox(width: 10,),
-                      Container(
-                        width: 164,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.blue100,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColors.blue100),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.calendar_month_outlined,
-                              color: AppColors.white,
-                            ),
-                            Text(
-                              '캘린더 보기',
-                              style: AppFonts.regular.copyWith(
-                                  color: AppColors.white, fontSize: 13),
-                            )
-                          ],
+                      SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const CalendarScreen())),
+                        child: Container(
+                          width: 164,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.blue100,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                              color: AppColors.blue100),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.calendar_month_outlined,
+                                color: AppColors.white,
+                              ),
+                              SizedBox(width: 5,),
+                              Text(
+                                '캘린더 보기',
+                                style: AppFonts.regular.copyWith(
+                                    color: AppColors.white, fontSize: 13),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -219,18 +255,50 @@ class MyPageScreen extends StatelessWidget {
                               style: AppFonts.semibold.copyWith(
                                   fontSize: 16, color: AppColors.gray70),
                             ),
-                            SizedBox(width: 6,),
-                            Icon(
-                              Icons.edit,
-                              size: 16,
-                              color: AppColors.gray40,
+                            IconButton(
+                              alignment: Alignment.centerLeft,
+                              icon: Icon(
+                                Icons.edit,
+                                size: 16,
+                                color: AppColors.gray50,
+                              ),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => TimeSetDialog());
+                              },
                             ),
-                            SizedBox(width: 20,),
-                            Text(
-                              '20 min 00 sec',
-                              style: AppFonts.semibold.copyWith(
-                                  fontSize: 16, color: AppColors.gray70),
-                            )
+                            Obx(() => Row(
+                                  children: [
+                                    timeController.selectedMinute.value < 10
+                                        ? Text(
+                                            '0${timeController.selectedMinute.value} min',
+                                            style: AppFonts.semibold.copyWith(
+                                                fontSize: 16,
+                                                color: AppColors.gray70),
+                                          )
+                                        : Text(
+                                            '${timeController.selectedMinute.value} min',
+                                            style: AppFonts.semibold.copyWith(
+                                                fontSize: 16,
+                                                color: AppColors.gray70),
+                                          ),
+                                          SizedBox(width: 3,),
+                                    timeController.selectedSecond.value < 10
+                                        ? Text(
+                                            '0${timeController.selectedSecond.value} sec',
+                                            style: AppFonts.semibold.copyWith(
+                                                fontSize: 16,
+                                                color: AppColors.gray70),
+                                          )
+                                        : Text(
+                                            '${timeController.selectedSecond.value} sec',
+                                            style: AppFonts.semibold.copyWith(
+                                                fontSize: 16,
+                                                color: AppColors.gray70),
+                                          ),
+                                  ],
+                                ))
                           ],
                         ),
                       )

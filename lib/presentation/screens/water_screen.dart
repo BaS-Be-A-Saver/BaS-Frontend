@@ -1,3 +1,4 @@
+import 'package:beasavor/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:beasavor/common/utils/app_color.dart';
 import 'package:beasavor/common/utils/app_fonts.dart';
@@ -11,12 +12,13 @@ class WaterScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.white,
-        foregroundColor: AppColors.gray70,
-        leadingWidth: 80,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 20), //로고와 왼쪽 화면 사이 간격 띄우기 위함
-          child: Image.asset(
-            AppImages.logo,
+        foregroundColor: AppColors.blue50,
+        leading: GestureDetector(
+          onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const MainScreen())),
+          child: Icon(
+            Icons.arrow_back_ios,
+            size: 24,
           ),
         ),
       ),
@@ -86,9 +88,14 @@ class WaterScreen extends StatelessWidget {
                                       color: AppColors.black,
                                     ),
                                   ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
                                   Container(
-                                    padding: EdgeInsets.fromLTRB(13, 0, 83, 0),
+                                    width: 196,
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           '출석체크하고',
@@ -139,9 +146,14 @@ class WaterScreen extends StatelessWidget {
                                       color: AppColors.black,
                                     ),
                                   ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
                                   Container(
-                                    padding: EdgeInsets.fromLTRB(13, 0, 83, 0),
+                                    width: 196,
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           '목표 성공하고',
@@ -192,9 +204,14 @@ class WaterScreen extends StatelessWidget {
                                       color: AppColors.black,
                                     ),
                                   ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
                                   Container(
-                                    padding: EdgeInsets.fromLTRB(13, 0, 83, 0),
+                                    width: 196,
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           '광고 시청하고',

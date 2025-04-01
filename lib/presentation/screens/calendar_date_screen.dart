@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:beasavor/common/utils/app_color.dart';
 import 'package:beasavor/common/utils/app_fonts.dart';
-import 'package:beasavor/common/utils/app_image.dart';
 
 class CalendarDateScreen extends StatelessWidget {
   const CalendarDateScreen({super.key});
@@ -10,17 +9,6 @@ class CalendarDateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.blue10,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        leadingWidth: 80,
-        leading: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Image.asset(AppImages.logo)),
-        title: Text(
-          '캘린더',
-          style: AppFonts.bold.copyWith(fontSize: 17),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -53,19 +41,19 @@ class CalendarDateScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '04',//required
+                        'date',//required
                         style: AppFonts.bold
                             .copyWith(fontSize: 40, color: AppColors.black),
                       ),
                       Text(
-                        'TUE',//required
+                        'day',//required
                         style: AppFonts.bold
                             .copyWith(fontSize: 16, color: AppColors.black),
                       ),
                     ],
                   ),
                   Text(
-                    'Feburary',//required
+                    'month',//required
                     style: AppFonts.bold
                         .copyWith(fontSize: 24, color: AppColors.gray70),
                   ),
@@ -84,7 +72,7 @@ class CalendarDateScreen extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.bathtub_outlined,
-                      size: 24,
+                      size: 20,
                       color: AppColors.gray70,
                     ),
                     SizedBox(

@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:beasavor/common/utils/app_color.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeScreen extends StatefulWidget{
-  const HomeScreen({super.key});
+class nHomeScreen extends StatefulWidget{
+  const nHomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<nHomeScreen> createState() => _nHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _nHomeScreenState extends State<nHomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: Text(
-          'HomeScreen',
+          'nHomeScreen',
           style:
               AppFonts.bold.copyWith(fontSize: 40, color: AppColors.blue100),
         ),

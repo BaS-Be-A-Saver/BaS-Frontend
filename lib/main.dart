@@ -1,3 +1,4 @@
+import 'package:beasavor/core/router.dart';
 import 'package:beasavor/logic/nickname_controller.dart';
 import 'package:beasavor/logic/timeset_controller.dart';
 import 'package:beasavor/presentation/screens/main_screen.dart';
@@ -32,13 +33,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'BaS',
+    // return MaterialApp(
+    //   title: 'BaS',
+    //   theme: ThemeData(
+    //     scaffoldBackgroundColor: AppColors.white,
+    //     useMaterial3: true,
+    //   ),
+    //   home: const MainScreen(),
+    // );
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: router,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.white,
         useMaterial3: true,
       ),
-      home: const MainScreen(),
     );
   }
 }

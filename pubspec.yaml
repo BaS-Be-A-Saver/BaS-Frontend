@@ -69,6 +69,7 @@ flutter:
   assets:
     - asset/image/
     - asset/image/clothes/
+    - asset/image/face/
     - asset/icon/
     - asset/svg/
 

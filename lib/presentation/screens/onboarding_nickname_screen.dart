@@ -12,6 +12,38 @@ class OnboardingNicknameScreen extends StatefulWidget {
 }
 
 class _OnboardingNicknameScreenState extends State<OnboardingNicknameScreen> {
+  final TextEditingController _controller = TextEditingController();
+  bool _isButtonEnabled = false;
+
+  String _guideText = '2-10자, 한글/영문/숫자 입력 가능';
+  Color _guideColor = AppColors.gray40;
+  bool _showErrorBorder = false;
+
+  String nickname = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    //텍스트가 바뀔 때마다 실행
+    _controller.addListener(() {
+      setState(() {
+        _isButtonEnabled = _controller.text.trim().isNotEmpty;
+        if (_isButtonEnabled) {
+          _guideText = '2-10자, 한글/영문/숫자 입력 가능';
+          _guideColor = AppColors.gray40;
+          _showErrorBorder = false;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -63,6 +95,7 @@ class _OnboardingNicknameScreenState extends State<OnboardingNicknameScreen> {
                     const SizedBox(height: 38),
                     // 닉네임 입력창
                     TextField(
+                      controller: _controller,
                       cursorColor: AppColors.gray70,
                       decoration: InputDecoration(
                         hintText: '',
@@ -70,21 +103,29 @@ class _OnboardingNicknameScreenState extends State<OnboardingNicknameScreen> {
                             horizontal: 16, vertical: 12),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: AppColors.gray10),
+                          borderSide: BorderSide(
+                            color: _showErrorBorder
+                                ? AppColors.red100
+                                : AppColors.gray10,
+                          ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide:
-                              const BorderSide(color: AppColors.blue100),
+                          borderSide: BorderSide(
+                            color: _showErrorBorder
+                                ? AppColors.red100
+                                : AppColors.blue100,
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 6),
-                    const Text(
-                      '2-10자, 한글/영문/숫자 입력 가능',
+                    //입력필드 가이드 텍스트
+                    Text(
+                      _guideText,
                       style: TextStyle(
                         fontFamily: 'PretendardRegular',
-                        color: AppColors.gray40,
+                        color: _guideColor,
                       ),
                     ),
                   ],
@@ -96,6 +137,17 @@ class _OnboardingNicknameScreenState extends State<OnboardingNicknameScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: OutlinedButton(
                 onPressed: () {
+                  // 입력된 값이 있는지 확인
+                  if (_controller.text.trim().isEmpty) {
+                    setState(() {
+                      _guideText = '닉네임을 입력해주세요';
+                      _guideColor = AppColors.red100;
+                      _showErrorBorder = true;
+                    });
+                    return;
+                  }
+                  nickname = _controller.text.trim();
+                  //print('nickname: $nickname');
                   context.go('/onboarding_face');
                 },
                 style: OutlinedButton.styleFrom(

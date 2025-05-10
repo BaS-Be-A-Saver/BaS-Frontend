@@ -15,7 +15,7 @@ class LandingScreenState extends State<LandingScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-        context.go('/splash'); // 홈 화면으로 이동
+        context.go('/splash'); // 스플래시 화면으로 이동
       }
     });
   }

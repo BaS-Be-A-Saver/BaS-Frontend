@@ -2,7 +2,7 @@ import 'package:beasavor/common/utils/app_fonts.dart';
 import 'package:beasavor/common/utils/app_image.dart';
 import 'package:beasavor/presentation/screens/alarm_screen.dart';
 import 'package:beasavor/presentation/screens/mypage_screen_n.dart';
-import 'package:beasavor/presentation/screens/shower_screen.dart';
+import 'package:beasavor/presentation/screens/showerbooth_screen.dart';
 import 'package:beasavor/presentation/screens/water_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:beasavor/common/utils/app_color.dart';
@@ -43,30 +43,31 @@ class MainScreen extends StatelessWidget {
       body: Obx(() {
         return IndexedStack(
           index: NavigatorController.to.currentIndex.value,
-          children: [ShowerScreen(), HomeScreen(), MyPageScreen()],
+          children: [ShowerboothScreen(), HomeScreen(), MyPageScreen()],
         );
       }),
-      bottomNavigationBar: 
-      Obx(() => ClipRRect(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60)),
-        child: BottomNavigationBar(
-          backgroundColor: AppColors.blue20,
-          selectedItemColor: AppColors.blue100,
-          unselectedItemColor: AppColors.gray40,
-          selectedLabelStyle: AppFonts.medium.copyWith(fontSize: 9),
-          unselectedLabelStyle: AppFonts.medium.copyWith(fontSize: 9),
+      bottomNavigationBar: Obx(() => ClipRRect(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(60), topRight: Radius.circular(60)),
+            child: BottomNavigationBar(
+                backgroundColor: AppColors.blue20,
+                selectedItemColor: AppColors.blue100,
+                unselectedItemColor: AppColors.gray40,
+                selectedLabelStyle: AppFonts.medium.copyWith(fontSize: 9),
+                unselectedLabelStyle: AppFonts.medium.copyWith(fontSize: 9),
                 currentIndex: NavigatorController.to.currentIndex.value,
                 onTap: (index) => NavigatorController.to.tapIndex(index),
                 items: const [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.shower_outlined), label: '샤워부스',),
+                    icon: Icon(Icons.shower_outlined),
+                    label: '샤워부스',
+                  ),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.home_outlined), label: 'home'),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.person_outline), label: 'My')
                 ]),
-      )),
-
+          )),
     );
   }
 }

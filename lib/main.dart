@@ -13,7 +13,7 @@ import 'package:beasavor/presentation/screens/mypage_screen_f.dart';
 import 'package:beasavor/presentation/screens/mypage_screen_n.dart';
 import 'package:beasavor/presentation/screens/mypage_screen_s.dart';
 import 'package:beasavor/presentation/screens/setting_screen.dart';
-import 'package:beasavor/presentation/screens/shower_screen.dart';
+import 'package:beasavor/presentation/screens/showerbooth_screen.dart';
 import 'package:beasavor/presentation/screens/water_screen.dart';
 import 'package:beasavor/common/utils/app_color.dart';
 import 'package:beasavor/presentation/stopwatch/stopwatch_screen.dart';

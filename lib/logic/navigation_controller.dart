@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-class NavigatorController extends GetxController{
+class NavigatorController extends GetxController {
   RxInt currentIndex = 0.obs;
 
-  void tapIndex(int index){
+  void tapIndex(int index) {
     currentIndex.value = index;
   }
 
